@@ -18,13 +18,13 @@ struct ImageMetadata {
 impl ImageMetadata {
     fn to_attribute_values(&self) -> Vec<(String, AttributeValue)> {
         vec![
-            ("Season".to_owned(), AttributeValue { s: Some(self.season.clone()), ..Default::default() }),
-            ("ShowName".to_owned(), AttributeValue { s: Some(self.show_name.clone()), ..Default::default() }),
-            ("Designer".to_owned(), AttributeValue { s: Some(self.designer.clone()), ..Default::default() }),
-            ("Description".to_owned(), AttributeValue { s: Some(self.description.clone()), ..Default::default() }),
+            ("season".to_owned(), AttributeValue { s: Some(self.season.clone()), ..Default::default() }),
+            ("show_name".to_owned(), AttributeValue { s: Some(self.show_name.clone()), ..Default::default() }),
+            ("designer".to_owned(), AttributeValue { s: Some(self.designer.clone()), ..Default::default() }),
+            ("description".to_owned(), AttributeValue { s: Some(self.description.clone()), ..Default::default() }),
             ("final_image_key".to_owned(), AttributeValue { s: Some(self.final_image_key.clone()), ..Default::default() }),
-            ("Label".to_owned(), AttributeValue { s: Some(self.label.clone()), ..Default::default() }),
-            ("Type".to_owned(), AttributeValue { s: Some(self.type_.clone()), ..Default::default() }),
+            ("label".to_owned(), AttributeValue { s: Some(self.label.clone()), ..Default::default() }),
+            ("type".to_owned(), AttributeValue { s: Some(self.type_.clone()), ..Default::default() }),
         ]
     }
 }
