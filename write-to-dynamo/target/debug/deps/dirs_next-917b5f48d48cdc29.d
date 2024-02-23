@@ -1,0 +1,8 @@
+C:\Users\DanteClark\rust-git\write-to-dynamodb\write-to-dynamo\target\debug\deps\libdirs_next-917b5f48d48cdc29.rmeta: C:\Users\DanteClark\.cargo\registry\src\index.crates.io-6f17d22bba15001f\dirs-next-2.0.0\src\lib.rs C:\Users\DanteClark\.cargo\registry\src\index.crates.io-6f17d22bba15001f\dirs-next-2.0.0\src\win.rs
+
+C:\Users\DanteClark\rust-git\write-to-dynamodb\write-to-dynamo\target\debug\deps\libdirs_next-917b5f48d48cdc29.rlib: C:\Users\DanteClark\.cargo\registry\src\index.crates.io-6f17d22bba15001f\dirs-next-2.0.0\src\lib.rs C:\Users\DanteClark\.cargo\registry\src\index.crates.io-6f17d22bba15001f\dirs-next-2.0.0\src\win.rs
+
+C:\Users\DanteClark\rust-git\write-to-dynamodb\write-to-dynamo\target\debug\deps\dirs_next-917b5f48d48cdc29.d: C:\Users\DanteClark\.cargo\registry\src\index.crates.io-6f17d22bba15001f\dirs-next-2.0.0\src\lib.rs C:\Users\DanteClark\.cargo\registry\src\index.crates.io-6f17d22bba15001f\dirs-next-2.0.0\src\win.rs
+
+C:\Users\DanteClark\.cargo\registry\src\index.crates.io-6f17d22bba15001f\dirs-next-2.0.0\src\lib.rs:
+C:\Users\DanteClark\.cargo\registry\src\index.crates.io-6f17d22bba15001f\dirs-next-2.0.0\src\win.rs:
