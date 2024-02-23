@@ -1,15 +1,17 @@
 use std::error::Error;
 use rusoto_core::Region;
 use rusoto_dynamodb::{AttributeValue, DynamoDb, DynamoDbClient, PutItemInput};
+use serde::Deserialize;
+use warp::{Filter, Rejection, Reply};
 
 // Define a struct to represent your data
-#[derive(Debug)]
+#[derive(Debug, Deserialize)]
 struct ImageMetadata {
     season: String,
     show_name: String,
     designer: String,
     description: String,
-    final_image_key: String, // Updated field name
+    final_image_key: String,
     label: String,
     type_: String,
 }
@@ -30,7 +32,7 @@ impl ImageMetadata {
 }
 
 // Function to write to DynamoDB
-async fn write_to_dynamodb(client: DynamoDbClient, table_name: String, metadata: ImageMetadata) -> Result<(), Box<dyn Error>> {
+async fn write_to_dynamodb(client: &DynamoDbClient, table_name: String, metadata: ImageMetadata) -> Result<(), Box<dyn Error>> {
     let item = metadata.to_attribute_values();
     let mut item_map = std::collections::HashMap::new();
     for (k, v) in item {
@@ -39,7 +41,7 @@ async fn write_to_dynamodb(client: DynamoDbClient, table_name: String, metadata:
 
     let input = PutItemInput {
         item: item_map,
-        table_name: table_name,
+        table_name,
         ..Default::default()
     };
 
@@ -48,27 +50,42 @@ async fn write_to_dynamodb(client: DynamoDbClient, table_name: String, metadata:
     Ok(())
 }
 
+// Define the API endpoint route
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn Error>> {
     // Create a client
     let client = DynamoDbClient::new(Region::default());
 
-    // Example metadata
-    let metadata = ImageMetadata {
-        season: "FW/04".to_string(),
-        show_name: "The High Streets".to_string(),
-        designer: "Takahiro Miyashita".to_string(),
-        description: "This is an example description".to_string(),
-        final_image_key: "final_images/1/final_image1.jpg".to_string(), // Updated field name
-        label: "Number Nine".to_string(),
-        type_: "pant".to_string(),
-    };
+    // Define the API endpoint route
+    let api_route = warp::post()
+        .and(warp::path("upload"))
+        .and(warp::body::json())
+        .and(warp::any().map(move || client.clone()))
+        .and_then(handle_request);
 
-    // Table name in DynamoDB
+    // Start the warp server
+    warp::serve(api_route)
+        .run(([127, 0, 0, 1], 3030))
+        .await;
+
+    Ok(())
+}
+
+async fn handle_request(metadata: ImageMetadata, client: DynamoDbClient) -> Result<impl Reply, Rejection> {
+    // Example metadata
     let table_name = "project-3-testing".to_string();
 
     // Write metadata to DynamoDB
-    write_to_dynamodb(client, table_name, metadata).await?;
-
-    Ok(())
+    match write_to_dynamodb(&client, table_name, metadata).await {
+        Ok(_) => {
+            // Respond with success message
+            Ok(warp::reply::html("Successfully received metadata and wrote to DynamoDB"))
+        }
+        Err(err) => {
+            // Log the error
+            eprintln!("Error: {}", err);
+            // Respond with error message
+            Err(warp::reject::reject())
+        }
+    }
 }
