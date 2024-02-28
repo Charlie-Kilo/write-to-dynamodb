@@ -9,5 +9,6 @@ serde = { version = "1.0", features = ["derive"] }
 rusoto_core = "0.48.0"
 rusoto_dynamodb = "0.48.0"
 tokio = { version = "1.36.0", features = ["full"] }
+rusoto_s3 = "0.48.0"
 
 

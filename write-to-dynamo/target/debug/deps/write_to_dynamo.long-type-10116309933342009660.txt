@@ -1,0 +1,1 @@
+fn(ImageMetadata, DynamoDbClient, S3Client) -> impl Future<Output = Result<impl Reply, Rejection>> {handle_request}

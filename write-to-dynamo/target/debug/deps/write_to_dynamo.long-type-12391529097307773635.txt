@@ -1,0 +1,1 @@
+fn(ImageMetadata, DynamoDbClient, {type error}) -> impl Future<Output = Result<impl Reply, Rejection>> {handle_request}

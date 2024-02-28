@@ -1043,6 +1043,19 @@ dependencies = [
 ]
 
 [[package]]
+name = "rusoto_s3"
+version = "0.48.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "7aae4677183411f6b0b412d66194ef5403293917d66e70ab118f07cc24c5b14d"
+dependencies = [
+ "async-trait",
+ "bytes",
+ "futures",
+ "rusoto_core",
+ "xml-rs",
+]
+
+[[package]]
 name = "rusoto_signature"
 version = "0.48.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1800,6 +1813,7 @@ version = "0.1.0"
 dependencies = [
  "rusoto_core",
  "rusoto_dynamodb",
+ "rusoto_s3",
  "serde",
  "tokio",
  "warp",
